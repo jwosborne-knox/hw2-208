@@ -8,8 +8,8 @@
     3.  `1 - 8 / 4 + 3`
     4.  `1 + 2 + 3 + 4 + 5`
     5.  `-1 - 2 - 3 - 4`
-    6.  What is, in your opinion, a benefit of infix notation when it comes to clarity?
-    7.  [optional] What is, in your opinion, a shortcoming of infix notation when it comes to clarity?
+    6.  What is, in your opinion, a benefit of prefix notation when it comes to clarity?
+    7.  [optional] What is, in your opinion, a shortcoming of prefix notation when it comes to clarity?
 2.  Draw box-pointer diagrams for each of the following lists. You may take clear photographs of hand-drawn diagrams
     1.  `'(1 2 3 4)`
     2.  `'(a (b c (d e)))`
