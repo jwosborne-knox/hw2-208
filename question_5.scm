@@ -1,16 +1,15 @@
-(define (nprimes k) ( ;;I think this is a bad approach, I just ain't got an idea on a better way, doesn't help that I'm not thinking in lisp right now
-	(cond ((not (> 0 k)) '())
-		  (let primes '(2))
-		  (let (has? L v) (map (if (equal? (car L) v) true) L v))
-		  (let (find-factors v d) (
-			  (if (> d 0) (
-			  (let divisors  '()) 
-			  (if (equal? 0 (remainder v d)) ( 
-				  (append divisors d) 
-				  (append divisors (find-factors v (- d 1)))))
-				  divisors))))
-		  (let (check-prime v) (equals '(2 v) (find-factors v (/ (v-1) 2))))
-		  (let (find-next-prime n) (
-			   (if (check-prime n) (if (has? primes n) (append primes n) (find-next-prime (+ 1 n)) ((find-next-prime (+ 1 n)))))))
-		   (let (main k) ((if (not (> 0 k)) (find-next-prime 3)) (main (- k 1))))
-		   (primes))))
+(define (nprimes k) ( ;;it is 2:30 in the morning and I don't have the tools to debug this properly, I need sleep and think that the ideas here are correct even if some bug is tripping it up
+					(display (find-primes k 0 0 '()))))
+(define (find-primes g c t L) (
+				(if (> g c) (
+					(cond ((equal? L '()) (append '(2) (find-primes g (+ c 1) 3 '(2))))
+							(else (cond ((prime t)  (append L (find-primes g (+ c 1) (+ t 1) L)))
+                                                                    (else (find-primes g c (+ t 1) L)))))) ('()))))
+(define (prime n) (
+	(if (equal? (length (factors n n) 2)) (true) (false))))
+(define (factors n d) (
+	(cond ((= d 0) '())
+              ((equal? (modulo n (round d)) 0) (append (list d) (factors n (- d 1))))
+			(else (factors n (- d 1))))))
+(define (has? L v) (cond ((equal? L '()) false)
+						 (else (or (equal? (car L) v) (has? (cdr L) v)))))

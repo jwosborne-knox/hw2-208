@@ -1,4 +1,4 @@
-;;ALL OF THIS WAS TESTED IN RACKET NOT REPL, 
+;;ALL OF THIS WAS TESTED IN RACKET NOT REPL, Talked with Michael Fisher about this homework so that might bleed in a bit?
 
 ;;Question 1
 	;i.
@@ -50,37 +50,43 @@
 
 ;;4
 	;i.
-		(define (lmin  L1 L2) (map min L1 L2))
-(define (lmax L1 L2) (map max L1 L2))
+		(define (lmin L1 L2) (map min L1 L2))
+		(define (lmax L1 L2) (map max L1 L2))
 ###TEST CASES AND FORMATING
+		(lmin '(1 2 3) '(3 2 1))
+		(lmax '(1 2 3) '(3 2 1))
 	;ii.
 		(define (list? L) (
 			(cond (((not (pair? L)) false)
 			          (not (pair? (cdr L)) false)
           (else true)))
 ###TEST CASES AND FORMATING
+		(list? 'a)
+		(list? '(a b))
+		(list? '(a b c))
 	;iiii.
 		(define (deep-sum L) (
-			(let (find-num L)
-				(if (pair? (car L)) (find-num (car L)) (car L))
-				(if (pair? (cdr L)) (find-num (cdr L)) (cdr L)))
-			(+ 0 (find-num L)))
+			(cond 	((equal? L '()) (0))
+					((list? (car L))) (cond ((not (equal? (cdr L) '()))  (+ (deep-sum (car L)) (deep-sum (cdr L))))
+											(else (deep-sum (car L))))
+					(else (+ (car L) (deep-sum (cdr L)))))))
 ###TEST CASES AND FORMATING
+		(deep-sum '(1 2 3 4 5))
+		(deep-sum '(1 (2 3) (4 5)))
+		(deep-sum '(1 (2 (3 4) 5))
 ;;5.
 	;see question_5.txt
 ;;6.
-	(define (merge-sort L) (
+	(define (merge-sort L) ( ;;turns out that I can't seem to figure out merge sort from a how to construct ir prospective at 1:30 in the morning, I'm just going to get worse at this the later I get in the night, so I'm going to cut my losses here, and move on
 		(let (split L)
 			(if (and (not (null? (car L))) (not (null? (cdr L)))) ((car L) (split (cdr L)))) ;;;the goal here being to get everything to it's own sub list so that I can parse it all nicely
 		(let (merge a b)
 			(if (> a b) '(b a) '(a b))) ;;;the thought is that this is how you compare and recombine 
-		() ;;I'm not wholly sure how to advance from here, this is a I don't really get the algorithm issue, I will fix that later
+		()
 	))
 ;;7.
-	(define (nsum L n) (
-		(let (add-next-n L n)
-			(cond (null? (car L) 0)
-				  ((not (pair? (cdr L)) (+ (car L) (cdr L))))
-				  (> 0 n)
-				       (+ (car L) (add-next-n (cdr L) (- n 1))))
-		(map add-next-n L n))))
+(define (nsum L n) (
+		(cond ((null? (car L)) 0)
+          ((null? (cdr L)) (car L))
+          ((null? (cdr (cdr L))) (list (+ (car L) (car (cdr L))) (car (cdr L))))
+          (else (append (list (+ (car L) (car (cdr L)) (car (cdr (cdr L))))) (nsum (cdr L) n))))))
