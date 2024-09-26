@@ -14,7 +14,7 @@
     1.  `'(1 2 3 4)`
     2.  `'(a (b c (d e)))`
     3.  `'(x (y z) (a b))`
-    4.  Write all valid combinations of `car` and `cdr` that can be applied to the list in `c`.
+    4.  Write all valid combinations of `car` and `cdr` that can be applied to the list in the previous subpart.
         For example, `(car (cdr '(1 2 3)))` is valid, but `(car (car '(1 2 3)))` is not because the inner `car` results in `1`.
 3.  Convert each of the following trees into a quoted list in scheme
     1.  ![img](./tree1.png)
